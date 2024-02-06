@@ -1,4 +1,5 @@
 const express = require('express');
+const functions = require('firebase-functions');
 const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const fs = require('fs');
 const sharp = require('sharp');
@@ -26,7 +27,7 @@ const reverseNumbersOnly = (str) => {
 };
 
 const loadFont = async () => {
-  const fontPath = path.join(__dirname, 'fonts', 'Assistant-Bold.ttf'); // Replace 'CustomFont.ttf' with your font file's name
+  const fontPath = path.join(__dirname, 'fonts', 'Assistant-Bold.ttf'); 
   return fs.readFileSync(fontPath);
 };
 
@@ -49,7 +50,7 @@ app.post('/Pdf', async (req, res) => {
 
 
 
-if (One3 === 'מתאים' || One3 === 'לא מתאים' || One3 === 'לא ישים') {
+if (One3 && !One24) {
 
   // Load the background image
   const imagePath2 = path.join(__dirname, 'images', 'background-2.png');
@@ -132,7 +133,7 @@ Page2(`${installerName}`, 1440, height - 995);
 Page2(`${LicenseId}`, 1010, height - 995);
 Page2(`${ClientName}`, 1500, height - 1205);
 
-} else if (One31 === 'תקין' || One31 === 'לא תקין' && One3 === 'מתאים' || One3 === 'לא מתאים' || One3 === 'לא ישים') {
+} else if (One24 && One3) {
 
 
    // Load the background image
@@ -255,7 +256,7 @@ Page2(`${ClientName}`, 1500, height - 1205);
     drawRightAlignedText(`${ClientName}`, 930, height - 1365);
 
 
-  } else if (One31 === 'תקין' || One31 === 'לא תקין') {
+  } else if (One24 && !One3) {
 
 
      // Load the background image
@@ -280,8 +281,6 @@ Page2(`${ClientName}`, 1500, height - 1205);
     }
   
     
-
-      
     
       Threepage.drawImage(backgroundImage3, {
         x: 0,
