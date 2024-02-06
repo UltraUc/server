@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "myserver-33371",
+    "Server": "gasform-dc88c",
+    "server": "myserver-33371"
+  },
+  "targets": {},
+  "etags": {}
+}
